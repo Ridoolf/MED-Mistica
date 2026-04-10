@@ -572,6 +572,23 @@ select {
   border: 1px solid rgba(231, 216, 198, 0.08);
   font-weight: 700;
 }
+.hero-burbujas-minimal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1.2rem 0;
+}
+
+.hero-burbujas-minimal span {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  color: var(--color-texto-secundario);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  letter-spacing: 0.3px;
+}
 
 .sesion-tarjeta-precio {
   padding: 1.45rem;
