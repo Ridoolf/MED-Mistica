@@ -6,31 +6,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (botonMenuMobile && navegacionPrincipal) {
     botonMenuMobile.addEventListener("click", () => {
-      navegacionPrincipal.classList.toggle("activo");
-      document.body.classList.toggle("menu-abierto");
-      botonMenuMobile.classList.toggle("activo");
+      const menuActivo = navegacionPrincipal.classList.toggle("activo");
+
+      document.body.classList.toggle("menu-abierto", menuActivo);
+      botonMenuMobile.classList.toggle("activo", menuActivo);
+      botonMenuMobile.setAttribute("aria-expanded", String(menuActivo));
     });
   }
 
   enlacesMenu.forEach((enlace) => {
     enlace.addEventListener("click", () => {
-      navegacionPrincipal.classList.remove("activo");
+      navegacionPrincipal?.classList.remove("activo");
+      botonMenuMobile?.classList.remove("activo");
+      botonMenuMobile?.setAttribute("aria-expanded", "false");
       document.body.classList.remove("menu-abierto");
-      botonMenuMobile.classList.remove("activo");
     });
   });
 
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", (event) => {
-      const targetId = anchor.getAttribute("href");
-      if (!targetId || targetId === "#") return;
+  document.querySelectorAll('a[href^="#"]').forEach((enlace) => {
+    enlace.addEventListener("click", (event) => {
+      const destinoId = enlace.getAttribute("href");
+      if (!destinoId || destinoId === "#") return;
 
-      const targetElement = document.querySelector(targetId);
-      if (!targetElement) return;
+      const destino = document.querySelector(destinoId);
+      if (!destino) return;
 
       event.preventDefault();
-
-      targetElement.scrollIntoView({
+      destino.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
@@ -39,10 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
+      (entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add("visible");
           }
         });
       },
